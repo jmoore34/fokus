@@ -10,7 +10,7 @@
  *
  * @flow
  */
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, globalShortcut } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -65,12 +65,25 @@ app.on('ready', async () => {
     process.env.DEBUG_PROD === 'true'
   ) {
     await installExtensions();
+
+    // Register quit key during development
+    const ret = globalShortcut.register('CommandOrControl+Q', () => {
+      app.quit();
+    });
+
+    if (!ret) {
+      console.log('registration failed')
+    }
   }
 
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
-    height: 728
+    height: 728,
+    kiosk: true,
+    skipTaskbar: true,
+    focusable: false,
+    fullscreen: true
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
