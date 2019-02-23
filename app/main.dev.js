@@ -83,8 +83,9 @@ app.on('ready', async () => {
     kiosk: true,
     skipTaskbar: true,
     focusable: false,
-    fullscreen: true
+    fullscreen: true,
   });
+  mainWindow.setAlwaysOnTop(true,"floating");
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
