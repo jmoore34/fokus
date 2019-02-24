@@ -62,7 +62,9 @@ export const setCurrentStatus = status => currentStatus = status;
 export const getCurrentStatus = () => currentStatus;
 
 export const goToTimerMode = () => {
-  const { displayW, displayH } = screen.getPrimaryDisplay().workAreaSize;
+  const screenDimensions =  screen.getPrimaryDisplay().workAreaSize;
+  const displayW = screenDimensions.width;
+  const displayH = screenDimensions.height;
   const w = 200, h = 50;
   mainWindow = new BrowserWindow({
     minWidth: w,
@@ -76,8 +78,8 @@ export const goToTimerMode = () => {
     fullscreen: false,
     titleBarStyle: "hidden",
     frame: false,
-    x: 10,
-    y: 10,
+    x: Number(displayW) - w,
+    y: Number(displayH) - h,
   });
   mainWindow.setAlwaysOnTop(true,"floating");
   mainWindow.loadURL(`file://${__dirname}/app.html`);
