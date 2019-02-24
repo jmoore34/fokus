@@ -61,7 +61,7 @@ export default class Home extends Component<Props> {
   {
     if(this.state.working == null)
       return 0;
-    else if(this.state.duration == null || !(parseDuration(this.state.duration)>0) )
+    else if(this.state.duration == null || !(parseDuration(this.state.duration)>0) || !this.state.duration.match(/([\d\.]+[hms])+/) )
       return 1;
     else if(this.state.name == null)
       return 2;
@@ -96,9 +96,16 @@ export default class Home extends Component<Props> {
             <Button blue selected={this.state.working === false} onClick={()=>this.setState({working: false})}>Play</Button>
           </Row>
           <Row className={!(this.getCompletedStages() >= 1) && styles.dim}>
-            <Button orange selected={this.state.duration === '10m' && this.state.customDuration === false} onClick={()=>this.setState({duration: '10m', customDuration: false})}>10</Button>
-            <Button blue selected={this.state.duration === '15m' && this.state.customDuration === false} onClick={()=>this.setState({duration: '15m', customDuration: false})}>15</Button>
-            <Button orange selected={this.state.duration === '30m' && this.state.customDuration === false} onClick={()=>this.setState({duration: '30m', customDuration: false})}>30</Button>
+            {
+              ['10m','15m','30m'].map((dur,i) => {
+                return <Button orange={i%2===0}
+                               blue={i%2===1}
+                               selected={this.state.duration === dur && this.state.customDuration === false}
+                               disabled={!(this.getCompletedStages() >= 1)}
+                               onClick={()=>{if (this.getCompletedStages() >= 1) {this.setState({duration: dur, customDuration: false})}}}>{dur}
+                </Button>
+              })
+            }
             <Input placeholder="Custom Time" className={!this.state.customDuration && styles.dimtext} value={this.props.duration} onChange={(event)=>{
               this.setState({duration: event.target.value, customDuration: true})
             }}/>
