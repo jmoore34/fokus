@@ -38,7 +38,7 @@ const Input = styled.input.attrs({
     color: silver;
   }
   transition: all 0.3s;
-`
+`;
 
 
 export default class Home extends Component<Props> {
