@@ -21,6 +21,7 @@ export default class Counter extends Component<Props> {
   constructor(props){
     super(props);
     this.getRemainingTime = this.getRemainingTime.bind(this);
+    this.close = this.close.bind(this);
     this.state = { remaining: this.getRemainingTime() };
   }
 
@@ -43,10 +44,16 @@ export default class Counter extends Component<Props> {
   tick(){
     this.setState({remaining: this.getRemainingTime()});
     if(this.state.remaining <= 0){
-      remote.getGlobal("goToMainMode")();
-      remote.getCurrentWindow().close();
+      close();
     }
   }
+
+  close() {
+    remote.getGlobal("goToMainMode")();
+    remote.getCurrentWindow().close();
+  }
+
+
   render() {
 
     const status = remote.getGlobal("getCurrentStatus")();
@@ -55,6 +62,7 @@ export default class Counter extends Component<Props> {
     <div>
       <div className = {styles.mockup}>Time Remaining: {format(this.state.remaining)}</div>
       <div className = {styles.mockup}> Task: {status.taskName} ({status.play ? "play" : "focus"})</div>
+      <div className = {`${styles.mockup} ${styles.close}`} onClick={this.close}>[x]</div>
     </div>
     )
 }

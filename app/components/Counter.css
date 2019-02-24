@@ -15,6 +15,14 @@
   font-size: 75%;
 }
 
+.close {
+  opacity: 0.7;
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  cursor: pointer;
+}
+
 .btnGroup {
   position: relative;
   top: 500px;
