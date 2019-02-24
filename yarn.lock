@@ -9958,6 +9958,11 @@ parse-color@^1.0.0:
   dependencies:
     color-convert "~0.5.0"
 
+parse-duration@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/parse-duration/-/parse-duration-0.1.1.tgz#13114ddc9891c1ecd280036244554de43647a226"
+  integrity sha1-ExFN3JiRwezSgANiRFVN5DZHoiY=
+
 parse-entities@^1.0.2, parse-entities@^1.1.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/parse-entities/-/parse-entities-1.2.0.tgz#9deac087661b2e36814153cb78d7e54a4c5fd6f4"

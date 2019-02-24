@@ -4,14 +4,14 @@
 
   /* color: white; */
   padding: 15px 32px;
-  margin: 100px;
+  margin: 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 160px;
   cursor: pointer;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   transition: all 0.3s;
+  opacity: 1;
 }
 
 .buttonOrange {
@@ -23,6 +23,6 @@
 }
 
 .buttonSelected {
-  filter: brightness(125%);
+  filter: brightness(150%);
   color: #232c39;
 }

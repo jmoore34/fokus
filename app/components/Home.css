@@ -5,6 +5,18 @@
   height: 100vh;
 } */
 
+.dim {
+  opacity: 0.5;
+}
+
+.dim * {
+  cursor: not-allowed !important;
+}
+
+.dimtext {
+  color: #585b5b;
+}
+
 .split {
   height: 100vh;
   width: 50%;

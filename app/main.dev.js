@@ -101,7 +101,7 @@ global.goToMainMode = () => {
     height,
     kiosk: true,
     skipTaskbar: true,
-    focusable: false,
+    //focusable: false,
     fullscreen: true,
     timerMode: false,
   });
