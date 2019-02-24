@@ -14,6 +14,7 @@ import { app, BrowserWindow, globalShortcut, screen } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
+import routes from './constants/routes';
 
 export default class AppUpdater {
   constructor() {
@@ -49,17 +50,18 @@ const installExtensions = async () => {
 
 
 
-let currentStatus = {
+global.currentStatus = {
   play: false,
   startTime: new Date(),
   taskName: "",
   taskNotes: "",
   duration: 0,
-  cooldownDuration: 4
+  cooldownDuration: 4,
+  timerMode: false,
 };
 
-export const setCurrentStatus = status => currentStatus = status;
-export const getCurrentStatus = () => currentStatus;
+global.setCurrentStatus = status => currentStatus = status;
+global.getCurrentStatus = () => currentStatus;
 
 export const goToTimerMode = () => {
   const screenDimensions =  screen.getPrimaryDisplay().workAreaSize;
@@ -80,10 +82,13 @@ export const goToTimerMode = () => {
     frame: false,
     x: Number(displayW) - w,
     y: Number(displayH) - h,
+    timerMode: true,
   });
   mainWindow.setAlwaysOnTop(true,"floating");
   mainWindow.loadURL(`file://${__dirname}/app.html`);
+  console.log(`file://${__dirname}/app.html`);
   mainWindow.setMenuBarVisibility(false);
+  currentStatus.timerMode = true;
 };
 
 export const goToMainMode = () => {
@@ -96,11 +101,12 @@ export const goToMainMode = () => {
     skipTaskbar: true,
     focusable: false,
     fullscreen: true,
-
+    timerMode: false,
   });
   mainWindow.setAlwaysOnTop(true,"floating");
   mainWindow.loadURL(`file://${__dirname}/app.html`);
   mainWindow.setMenuBarVisibility(false);
+  currentStatus.timerMode = false;
 };
 
 
