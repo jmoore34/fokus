@@ -20,7 +20,8 @@ export default class Counter extends Component<Props> {
 
   constructor(props){
     super(props);
-    this.state = {remaining: 0}
+    this.getRemainingTime = this.getRemainingTime.bind(this);
+    this.state = { remaining: this.getRemainingTime() };
   }
 
   componentDidMount(){
@@ -32,15 +33,19 @@ export default class Counter extends Component<Props> {
   componentWillUnmount(){
     clearInterval(this.interval);
   }
-  tick(){
+
+  getRemainingTime() {
     const status = remote.getGlobal("getCurrentStatus")();
     const startTime = status.startTime.valueOf();
-    this.setState({remaining: (startTime + status.duration) - Date.now()});
-    console.log(status.remaining, startTime, status.duration, ((startTime + status.duration) - Date.now()));
-if(this.state.remaining <= 0){
-  remote.getGlobal("goToMainMode")();
-  remote.getCurrentWindow().close();
-}
+    return (startTime + status.duration) - Date.now();
+  }
+
+  tick(){
+    this.setState({remaining: this.getRemainingTime()});
+    if(this.state.remaining <= 0){
+      remote.getGlobal("goToMainMode")();
+      remote.getCurrentWindow().close();
+    }
   }
   render() {
 
@@ -49,7 +54,7 @@ if(this.state.remaining <= 0){
     return (
     <div>
       <div className = {styles.mockup}>Time Remaining: {format(this.state.remaining)}</div>
-      <div className = {styles.mockup}> Task: {status.name} ({status.play ? "play" : "focus"})</div>
+      <div className = {styles.mockup}> Task: {status.taskName} ({status.play ? "play" : "focus"})</div>
     </div>
     )
 }
