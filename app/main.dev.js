@@ -10,7 +10,7 @@
  *
  * @flow
  */
-import { app, BrowserWindow, globalShortcut } from 'electron';
+import { app, BrowserWindow, globalShortcut, screen } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -47,6 +47,65 @@ const installExtensions = async () => {
   ).catch(console.log);
 };
 
+
+
+let currentStatus = {
+  play: false,
+  startTime: new Date(),
+  taskName: "",
+  taskNotes: "",
+  duration: 0,
+  cooldownDuration: 4
+};
+
+export const setCurrentStatus = status => currentStatus = status;
+export const getCurrentStatus = () => currentStatus;
+
+export const goToTimerMode = () => {
+  const { displayW, displayH } = screen.getPrimaryDisplay().workAreaSize;
+  const w = 200, h = 50;
+  mainWindow = new BrowserWindow({
+    minWidth: w,
+    minHeight: h,
+    height: h,
+    width: w,
+    resizable: true,
+    draggable: true,
+    skipTaskbar: true,
+    focusable: true,
+    fullscreen: false,
+    titleBarStyle: "hidden",
+    frame: false,
+    x: 10,
+    y: 10,
+  });
+  mainWindow.setAlwaysOnTop(true,"floating");
+  mainWindow.loadURL(`file://${__dirname}/app.html`);
+  mainWindow.setMenuBarVisibility(false);
+};
+
+export const goToMainMode = () => {
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+  mainWindow = new BrowserWindow({
+    show: false,
+    width,
+    height,
+    kiosk: true,
+    skipTaskbar: true,
+    focusable: false,
+    fullscreen: true,
+
+  });
+  mainWindow.setAlwaysOnTop(true,"floating");
+  mainWindow.loadURL(`file://${__dirname}/app.html`);
+  mainWindow.setMenuBarVisibility(false);
+};
+
+
+
+
+
+
 /**
  * Add event listeners...
  */
@@ -76,18 +135,8 @@ app.on('ready', async () => {
     }
   }
 
-  mainWindow = new BrowserWindow({
-    show: false,
-    width: 1024,
-    height: 728,
-    kiosk: true,
-    skipTaskbar: true,
-    focusable: false,
-    fullscreen: true,
-  });
-  mainWindow.setAlwaysOnTop(true,"floating");
+  goToTimerMode();
 
-  mainWindow.loadURL(`file://${__dirname}/app.html`);
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
