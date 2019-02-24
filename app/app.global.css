@@ -45,3 +45,7 @@ a:hover {
   text-decoration: none;
   cursor: pointer;
 }
+
+.grad {
+  background-image: linear-gradient(to right, #80bfff 40%, #ffa366 60%);
+}
