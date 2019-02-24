@@ -5,6 +5,7 @@ import routes from '../constants/routes';
 import styles from './Home.css';
 import styled from 'styled-components'
 import Button from './Button'
+import buttonStyle from './Button.css' // I apologize
 import parseDuration from 'parse-duration'
 import { remote } from 'electron';
 
@@ -14,7 +15,7 @@ const Row = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  align-content: center;
+  align-content: stretch;
 `;
 
 const Col = styled.div`
@@ -27,16 +28,11 @@ const Col = styled.div`
 
 const Input = styled.input.attrs({
   type: 'text',
+  className: buttonStyle.button,
   size: props => (props.small ? 5: undefined),})`
-  border-radius: 3px;
-  border: 1px solid blue;
-  display: block;
-  margin: 0 0 1em;
-  padding: 15px 32px;
-  font-size: 20px;
-  ::placeholder {
-    color: silver;
-  }
+  background-color: white;
+  color: black;
+  font-size: 25px; 
   transition: all 0.3s;
 `;
 

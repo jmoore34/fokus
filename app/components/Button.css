@@ -1,17 +1,23 @@
 .button {
+  --padding-x: 15px;
+  --padding-y: 32px;
+  --font-size: 35px;
+
   background-color: rgb(0, 0, 0);
   border: none;
 
   /* color: white; */
-  padding: 15px 32px;
+  padding: var(--padding-x) var(--padding-y);
   margin: 20px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  display: block;
   cursor: pointer;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   transition: all 0.3s;
   opacity: 1;
+  font-size: var(--font-size);
+  color: white;
 }
 
 .buttonOrange {
@@ -23,6 +29,9 @@
 }
 
 .buttonSelected {
-  filter: brightness(150%);
-  color: #232c39;
+  filter: brightness(120%);
+
+  /* color: #5b595a; */
+  font-size: calc(var(--font-size) + 4px);
+  padding: calc(var(--padding-x) + 4px) calc(var(--padding-y) + 4px);
 }
