@@ -146,7 +146,7 @@ app.on('ready', async () => {
     }
   }
 
-  goToTimerMode();
+  goToMainMode();
 
 
   // @TODO: Use 'ready-to-show' event
