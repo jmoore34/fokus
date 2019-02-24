@@ -11,6 +11,10 @@
   letter-spacing: -0.025em;
 }
 
+.mockup {
+  font-size: 75%;
+}
+
 .btnGroup {
   position: relative;
   top: 500px;
