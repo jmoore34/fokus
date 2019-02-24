@@ -35,7 +35,7 @@ const Input = styled.input.attrs({
   padding: 15px 32px;
   font-size: 20px;
   ::placeholder {
-    color: blue;
+    color: silver;
   }
   transition: all 0.3s;
 `
