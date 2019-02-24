@@ -55,7 +55,7 @@ global.currentStatus = {
   startTime: new Date(),
   taskName: "",
   taskNotes: "",
-  duration: 0,
+  duration: 10000,
   cooldownDuration: 4,
   timerMode: false,
 };
@@ -63,12 +63,13 @@ global.currentStatus = {
 global.setCurrentStatus = status => currentStatus = status;
 global.getCurrentStatus = () => currentStatus;
 
-export const goToTimerMode = () => {
+global.goToTimerMode = () => {
   const screenDimensions =  screen.getPrimaryDisplay().workAreaSize;
   const displayW = screenDimensions.width;
   const displayH = screenDimensions.height;
   const w = 200, h = 50;
   mainWindow = new BrowserWindow({
+    show: false,
     minWidth: w,
     minHeight: h,
     height: h,
@@ -89,9 +90,10 @@ export const goToTimerMode = () => {
   console.log(`file://${__dirname}/app.html`);
   mainWindow.setMenuBarVisibility(false);
   currentStatus.timerMode = true;
+  mainWindow.show();
 };
 
-export const goToMainMode = () => {
+global.goToMainMode = () => {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
   mainWindow = new BrowserWindow({
     show: false,
@@ -107,6 +109,7 @@ export const goToMainMode = () => {
   mainWindow.loadURL(`file://${__dirname}/app.html`);
   mainWindow.setMenuBarVisibility(false);
   currentStatus.timerMode = false;
+  mainWindow.show();
 };
 
 

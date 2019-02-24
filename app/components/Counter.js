@@ -28,21 +28,28 @@ export default class Counter extends Component<Props> {
       ()=> this.tick(), 1000
     )
   }
-  tick(){
-    const state = remote.getGlobal("getCurrentStatus")();
-    const startTime = state.startTime.valueOf();
-    this.setState({remaining: (startTime + state.duration) - Date.now()});
-    console.log(state.remaining, startTime, state.duration, ((startTime + state.duration) - Date.now()));
 
+  componentWillUnmount(){
+    clearInterval(this.interval);
+  }
+  tick(){
+    const status = remote.getGlobal("getCurrentStatus")();
+    const startTime = status.startTime.valueOf();
+    this.setState({remaining: (startTime + status.duration) - Date.now()});
+    console.log(status.remaining, startTime, status.duration, ((startTime + status.duration) - Date.now()));
+if(this.state.remaining <= 0){
+  remote.getGlobal("goToMainMode")();
+  remote.getCurrentWindow().close();
+}
   }
   render() {
 
-    const state = remote.getGlobal("getCurrentStatus")();
+    const status = remote.getGlobal("getCurrentStatus")();
 
     return (
     <div>
       <div className = {styles.mockup}>Time Remaining: {format(this.state.remaining)}</div>
-      <div className = {styles.mockup}> Task: {state.name} ({state.play ? "play" : "focus"})</div>
+      <div className = {styles.mockup}> Task: {status.name} ({status.play ? "play" : "focus"})</div>
     </div>
     )
 }
