@@ -9,7 +9,9 @@ export default class Button extends Component {
 
   render() {
     return (
-      <div  className={`${this.props.orange && styles.buttonOrange} ${this.props.blue && styles.buttonBlue} ${styles.button} ${this.props.selected && styles.buttonSelected}`}
+      <div  className={
+        `${this.props.orange && styles.buttonOrange} ${this.props.blue && styles.buttonBlue} ${styles.button} ${this.props.selected && styles.buttonSelected}`
+      }
             onClick={() => {this.props.onClick()}}
       >
         <h2>{this.props.children}</h2>

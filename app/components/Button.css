@@ -4,6 +4,7 @@
 
   /* color: white; */
   padding: 15px 32px;
+  margin: 100px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -22,6 +23,6 @@
 }
 
 .buttonSelected {
-  background-color: white;
+  filter: brightness(125%);
   color: #232c39;
 }

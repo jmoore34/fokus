@@ -1,0 +1,20 @@
+.textbox{
+    cursor: auto;
+
+}
+
+.large{
+    
+
+}
+
+.normal{
+    border: none;
+    padding: 15px 32px;
+    margin: 100px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 160px;
+}
+
