@@ -25,3 +25,7 @@ The coolest sounding solution is not always the best. While educational, our cho
 ## What's next for fokus
 
 The big next step is increasing functionality for the app. Adding features such as custom user profiles, browser integration, and application blocking could take fokus from a hackathon project to a product useful for individuals and businesses alike. What’s next for us? A nap, hopefully.
+
+### Open source software used
+
+https://github.com/electron-react-boilerplate/electron-react-boilerplate
