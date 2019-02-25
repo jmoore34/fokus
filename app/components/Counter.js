@@ -44,7 +44,7 @@ export default class Counter extends Component<Props> {
   tick(){
     this.setState({remaining: this.getRemainingTime()});
     if(this.state.remaining <= 0){
-      close();
+      this.close();
     }
   }
 
