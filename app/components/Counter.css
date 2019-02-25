@@ -12,7 +12,7 @@
 }
 
 .mockup {
-  font-size: 75%;
+  font-size: 25vh;
 }
 
 .close {
@@ -21,6 +21,7 @@
   right: 1px;
   top: 1px;
   cursor: pointer;
+  -webkit-app-region: no-drag !important;
 }
 
 .btnGroup {
@@ -41,9 +42,15 @@
   opacity: 0.7;
   cursor: pointer;
   font-family: Arial, Helvetica, Helvetica Neue, sans-serif;
+  -webkit-app-region: no-drag !important;
 }
 
 .btn:hover {
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.draggable {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
 }
