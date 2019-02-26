@@ -1,8 +1,8 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "ElectronReact",
-  "version": "0.17.1",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "name": "fokus",
+  "productName": "fokus",
+  "version": "0.0.1",
+  "description": "A productivity tool that you can not ignore",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
     "build-dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",
@@ -56,8 +56,8 @@
   },
   "main": "./app/main.prod.js",
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.develar.ElectronReact",
+    "productName": "fokus",
+    "appId": "org.hackutd.fokus",
     "files": [
       "app/dist/",
       "app/app.html",
@@ -100,30 +100,34 @@
     },
     "publish": {
       "provider": "github",
-      "owner": "electron-react-boilerplate",
-      "repo": "electron-react-boilerplate",
+      "owner": "programjm",
+      "repo": "fokus",
       "private": false
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electron-react-boilerplate/electron-react-boilerplate.git"
+    "url": "git+https://github.com/programjm/fokus.git"
   },
   "author": {
-    "name": "Electron React Boilerplte Maintainers",
-    "email": "electronreactboilerplate@gmail.com",
-    "url": "https://electron-react-boilerplate.js.org"
+    "name": "Fokus Development Team",
+    "email": "",
+    "url": "https://github.com/programjm/fokus"
   },
   "contributors": [
     {
-      "name": "Vikram Rangaraj",
-      "email": "vikr01@icloud.com",
-      "url": "https://github.com/vikr01"
+      "name": "Jonathan Moore",
+      "email": "jtm170330@utdallas.edu",
+      "url": "https://github.com/programjm"
     },
     {
-      "name": "Amila Welihinda",
-      "email": "amilajack@gmail.com",
-      "url": "https://github.com/amilajack"
+      "name": "Jacob"
+    },
+    {
+      "name": "Tanner"
+    },
+    {
+      "name": "Collin"
     }
   ],
   "license": "MIT",
@@ -132,16 +136,21 @@
   },
   "keywords": [
     "electron",
-    "boilerplate",
+    "javascript",
     "react",
-    "redux",
-    "flow",
-    "sass",
-    "webpack",
-    "hot",
-    "reload"
+    "productivity",
+    "time management",
+    "task management",
+    "efficiency",
+    "blocker",
+    "blocking",
+    "block",
+    "work",
+    "working",
+    "break",
+    "balance"
   ],
-  "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
+  "homepage": "https://github.com/programjm/fokus",
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {
@@ -281,7 +290,7 @@
     "yarn": ">=0.21.3"
   },
   "collective": {
-    "url": "https://opencollective.com/electron-react-boilerplate-594"
+    "url": "https://opencollective.com/"
   },
   "browserslist": "electron 1.6",
   "husky": {
