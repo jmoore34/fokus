@@ -20,6 +20,14 @@
   color: white;
 }
 
+.button > div {
+  display: block;
+}
+
+.button > div.desc {
+  font-size: small;
+}
+
 .buttonOrange {
   background-color: hsl(24, 100%, 60%);
 }
@@ -34,4 +42,9 @@
   /* color: #5b595a; */
   font-size: calc(var(--font-size) + 4px);
   padding: calc(var(--padding-x) + 4px) calc(var(--padding-y) + 4px);
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

@@ -51,13 +51,13 @@ const installExtensions = async () => {
 
 
 
-global.currentStatus = {
+let currentStatus = {
   play: false,
   startTime: new Date(),
   taskName: "",
   taskNotes: "",
-  duration: 10000,
-  cooldownDuration: 4,
+  duration: 0,
+  breakCooldownDuration: 0,
   timerMode: false,
 };
 

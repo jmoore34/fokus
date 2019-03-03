@@ -8,6 +8,7 @@ import Button from './Button'
 import buttonStyle from './Button.css' // I apologize
 import parseDuration from 'parse-duration'
 import { remote } from 'electron';
+import Countdown from 'react-countdown-now'
 
 type Props = {};
 const Row = styled.div`
@@ -42,15 +43,28 @@ export default class Home extends Component<Props> {
   constructor(props)
   {
     super(props);
+
+    this.getCompletedStages = this.getCompletedStages.bind(this);
+    this.submit = this.submit.bind(this);
+    this.getBreakCooldownEnd = this.getBreakCooldownEnd.bind(this);
+
+
+    // Status of most recent break/play used to see if in cooldown
+    const breakCooldownEnd = this.getBreakCooldownEnd();
+
     this.state = {
       working: null,
       duration: null,
       customDuration: false,
-      name: ""
+      name: "",
+      breakCooldown: Date.now() < breakCooldownEnd.valueOf(), // Break cooldown has not yet finished
     };
 
-    this.getCompletedStages = this.getCompletedStages.bind(this);
-    this.submit = this.submit.bind(this);
+  }
+
+  getBreakCooldownEnd() {
+    const status = remote.getGlobal("getCurrentStatus")();
+    return status.startTime.valueOf() + status.duration + status.breakCooldownDuration;
   }
 
   getCompletedStages()
@@ -67,7 +81,8 @@ export default class Home extends Component<Props> {
 
   submit()
   {
-    const status = {
+    const currentStatus = remote.getGlobal("getCurrentStatus")();
+    const statusChange = {
       play: !this.state.working,
       startTime: new Date(),
       taskName: this.state.name,
@@ -76,7 +91,7 @@ export default class Home extends Component<Props> {
       timerMode: true
     };
 
-    remote.getGlobal("setCurrentStatus")(status);
+    remote.getGlobal("setCurrentStatus")({...currentStatus, ...statusChange});
 
     remote.getGlobal("goToTimerMode")();
     remote.getCurrentWindow().close();
@@ -88,8 +103,24 @@ export default class Home extends Component<Props> {
       <div>
         <Col>
           <Row>
-            <Button orange selected={this.state.working} onClick={()=>this.setState({working: true})}>Work</Button>
-            <Button blue selected={this.state.working === false} onClick={()=>this.setState({working: false})}>Play</Button>
+            <Button orange
+                    selected={this.state.working}
+                    onClick={()=>this.setState({working: true})}
+                    desc=""
+                    >Work</Button>
+            <Button blue
+                    selected={this.state.working === false}
+                    onClick={()=>this.setState({working: false})}
+                    disabled={this.state.breakCooldown }
+                    className={ this.state.breakCooldown && styles.dim } //this is so hacky and needs to be refactored
+                    desc={ this.state.breakCooldown ?
+                      <Countdown
+                        date={this.getBreakCooldownEnd()}
+                        onComplete={()=>{ this.setState({breakCooldown: false} )}}
+                        />
+                      : ''
+                    }
+            >Play</Button>
           </Row>
           <Row className={!(this.getCompletedStages() >= 1) && styles.dim}>
             {
