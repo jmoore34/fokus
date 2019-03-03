@@ -100,13 +100,13 @@ global.goToMainMode = () => {
     show: false,
     width,
     height,
-    kiosk: true,
-    skipTaskbar: true,
+    kiosk: !DEVELOPMENT_BUILD, //true, except when testing
+    skipTaskbar: !DEVELOPMENT_BUILD,
     //focusable: false,
-    fullscreen: true,
+    fullscreen: !DEVELOPMENT_BUILD, //true, except when testing
     timerMode: false,
   });
-  mainWindow.setAlwaysOnTop(true,"floating");
+  mainWindow.setAlwaysOnTop(!DEVELOPMENT_BUILD,"floating");
   mainWindow.loadURL(`file://${__dirname}/app.html`);
   mainWindow.setMenuBarVisibility(false);
   currentStatus.timerMode = false;
