@@ -126,7 +126,7 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }*/
-  if (global.currentStatus.timerMode)
+  if (currentStatus.timerMode)
     global.goToTimerMode();
   else
     global.goToMainMode();
