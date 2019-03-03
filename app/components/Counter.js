@@ -7,13 +7,7 @@ import {remote} from 'electron';
 import format from "format-duration";
 
 
-type Props = {
-  increment: () => void,
-  incrementIfOdd: () => void,
-  incrementAsync: () => void,
-  decrement: () => void,
-  counter: number
-};
+
 
 export default class Counter extends Component<Props> {
   props: Props;
