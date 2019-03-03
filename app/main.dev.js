@@ -84,7 +84,6 @@ global.goToTimerMode = () => {
     frame: false,
     x: Number(displayW) - w,
     y: Number(displayH) - h,
-    timerMode: true,
   });
   mainWindow.setAlwaysOnTop(true,"floating");
   mainWindow.loadURL(`file://${__dirname}/app.html`);
@@ -104,7 +103,6 @@ global.goToMainMode = () => {
     skipTaskbar: !DEVELOPMENT_BUILD,
     //focusable: false,
     fullscreen: !DEVELOPMENT_BUILD, //true, except when testing
-    timerMode: false,
   });
   mainWindow.setAlwaysOnTop(!DEVELOPMENT_BUILD,"floating");
   mainWindow.loadURL(`file://${__dirname}/app.html`);
