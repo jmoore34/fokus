@@ -26,15 +26,16 @@ export default class AppUpdater {
 
 let mainWindow = null;
 
+const DEVELOPMENT_BUILD =
+  process.env.NODE_ENV === 'development' ||
+  process.env.DEBUG_PROD === 'true';
+
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
 }
 
-if (
-  process.env.NODE_ENV === 'development' ||
-  process.env.DEBUG_PROD === 'true'
-) {
+if (DEVELOPMENT_BUILD) {
   require('electron-debug')();
 }
 
