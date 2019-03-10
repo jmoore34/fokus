@@ -47,7 +47,7 @@ export default class Counter extends Component<Props> {
     const currentStatus = remote.getGlobal("getCurrentStatus")();
     const statusUpdate = {
       duration: Date.now() - currentStatus.startTime.valueOf(),
-      breakCooldownDuration: currentStatus.play ? 240000 : 0,
+      breakCooldownDuration: currentStatus.play ? currentStatus.breakCooldownDuration + 60000 : 0,
     };
     remote.getGlobal("setCurrentStatus")({...currentStatus, ...statusUpdate});
     remote.getGlobal("goToMainMode")();
