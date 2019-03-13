@@ -49,8 +49,6 @@ const installExtensions = async () => {
   ).catch(console.log);
 };
 
-
-
 let currentStatus = {
   play: false,
   startTime: new Date(),
@@ -80,14 +78,13 @@ global.goToTimerMode = () => {
     skipTaskbar: true,
     focusable: true,
     fullscreen: false,
-    titleBarStyle: "hidden",
+    titleBarStyle: 'hidden',
     frame: false,
     x: Number(displayW) - w,
-    y: Number(displayH) - h,
+    y: Number(displayH) - h
   });
-  mainWindow.setAlwaysOnTop(true,"floating");
+  mainWindow.setAlwaysOnTop(true,'floating');
   mainWindow.loadURL(`file://${__dirname}/app.html`);
-  console.log(`file://${__dirname}/app.html`);
   mainWindow.setMenuBarVisibility(false);
   currentStatus.timerMode = true;
   mainWindow.show();
@@ -111,11 +108,9 @@ global.goToMainMode = () => {
   mainWindow.show();
 };
 
+global.goToSettingsMode = () => {
 
-
-
-
-
+};
 /**
  * Add event listeners...
  */
@@ -149,8 +144,7 @@ app.on('ready', async () => {
     }
   }
 
-  goToMainMode();
-
+  global.goToMainMode();
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
@@ -172,7 +166,6 @@ app.on('ready', async () => {
 
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();
-
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
   new AppUpdater();

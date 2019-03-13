@@ -30,18 +30,17 @@ const Col = styled.div`
 const Input = styled.input.attrs({
   type: 'text',
   className: buttonStyle.button,
-  size: props => (props.small ? 5: undefined),})`
+  size: props => (props.small ? 5 : undefined)
+})`
   background-color: white;
   color: black;
-  font-size: 25px; 
+  font-size: 25px;
   transition: all 0.3s;
 `;
 
 
 export default class Home extends Component<Props> {
-
-  constructor(props)
-  {
+  constructor(props) {
     super(props);
 
     this.getCompletedStages = this.getCompletedStages.bind(this);
@@ -75,12 +74,11 @@ export default class Home extends Component<Props> {
       return 1;
     else if(this.state.name == null)
       return 2;
-    else 
+    else
       return 3;
   }
 
-  submit()
-  {
+  submit() {
     const currentStatus = remote.getGlobal("getCurrentStatus")();
     const statusChange = {
       play: !this.state.working,
