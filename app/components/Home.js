@@ -110,7 +110,7 @@ export default class Home extends Component<Props> {
       return 0;
     else if(this.state.duration == null || !(parseDuration(this.state.duration)>0) || !this.state.duration.match(/([\d\.]+[hms])+/) )
       return 1;
-    else if(this.state.name == null)
+    else if(this.state.name.length < 8 && this.state.working)
       return 2;
     else
       return 3;
