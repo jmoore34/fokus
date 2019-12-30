@@ -1,41 +1,36 @@
 // @flow
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { remote } from 'electron';
+import format from 'format-duration';
 import styles from './Counter.css';
 import routes from '../constants/routes';
-import {remote} from 'electron';
-import format from "format-duration";
-
-
-
 
 export default class Counter extends Component<Props> {
   props: Props;
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.getRemainingTime = this.getRemainingTime.bind(this);
     this.close = this.close.bind(this);
     this.state = { remaining: this.getRemainingTime() };
   }
 
-  componentDidMount(){
-    this.interval = setInterval(
-      ()=> this.tick(), 1000
-    )
+  componentDidMount() {
+    this.interval = setInterval(() => this.tick(), 1000);
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     clearInterval(this.interval);
   }
 
   getRemainingTime() {
-    const status = remote.getGlobal("getCurrentStatus")();
+    const status = remote.getGlobal('getCurrentStatus')();
     const startTime = status.startTime.valueOf();
     return (startTime + status.duration) - Date.now();
   }
 
-  tick(){
+  tick() {
     this.setState({remaining: this.getRemainingTime()});
     if(this.state.remaining <= 0){
       this.close();
@@ -44,20 +39,20 @@ export default class Counter extends Component<Props> {
 
   close() {
     // Restore the duration because the user may have exited early or stayed longer
-    const currentStatus = remote.getGlobal("getCurrentStatus")();
+    const currentStatus = remote.getGlobal('getCurrentStatus')();
     const statusUpdate = {
       duration: Date.now() - currentStatus.startTime.valueOf(),
       breakCooldownDuration: currentStatus.play ? currentStatus.breakCooldownDuration + 60000 : 0,
     };
-    remote.getGlobal("setCurrentStatus")({...currentStatus, ...statusUpdate});
-    remote.getGlobal("goToMainMode")();
+    remote.getGlobal('setCurrentStatus')({ ...currentStatus, ...statusUpdate });
+    remote.getGlobal('goToMainMode')();
     remote.getCurrentWindow().close();
   }
 
 
   render() {
 
-    const status = remote.getGlobal("getCurrentStatus")();
+    const status = remote.getGlobal('getCurrentStatus')();
 
     return (
     <div>

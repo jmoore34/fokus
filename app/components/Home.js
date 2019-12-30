@@ -1,14 +1,13 @@
 // @flow
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import routes from '../constants/routes';
-import styles from './Home.css';
-import styled from 'styled-components'
-import Button from './Button'
-import buttonStyle from './Button.css' // I apologize
-import parseDuration from 'parse-duration'
+import parseDuration from 'parse-duration';
+import styled from 'styled-components';
 import { remote } from 'electron';
-import Countdown from 'react-countdown-now'
+import Countdown from 'react-countdown-now';
+import styles from './Home.css';
+import Button from './Button';
+import SettingsButton from './SettingsButton';
+import buttonStyle from './Button.css'; // I apologize
 
 type Props = {};
 const Row = styled.div`
@@ -26,7 +25,6 @@ const Col = styled.div`
   height: 100vh;
 `;
 
-
 const Input = styled.input.attrs({
   type: 'text',
   className: buttonStyle.button,
@@ -38,7 +36,6 @@ const Input = styled.input.attrs({
   transition: all 0.3s;
 `;
 
-
 export default class Home extends Component<Props> {
   constructor(props) {
     super(props);
@@ -47,7 +44,6 @@ export default class Home extends Component<Props> {
     this.submit = this.submit.bind(this);
     this.getBreakCooldownEnd = this.getBreakCooldownEnd.bind(this);
 
-
     // Status of most recent break/play used to see if in cooldown
     const breakCooldownEnd = this.getBreakCooldownEnd();
 
@@ -55,95 +51,142 @@ export default class Home extends Component<Props> {
       working: null,
       duration: null,
       customDuration: false,
-      name: "",
-      breakCooldown: Date.now() < breakCooldownEnd.valueOf(), // Break cooldown has not yet finished
+      name: '',
+      breakCooldown: Date.now() < breakCooldownEnd.valueOf() // Break cooldown has not yet finished
     };
-
   }
 
   getBreakCooldownEnd() {
-    const status = remote.getGlobal("getCurrentStatus")();
-    return status.startTime.valueOf() + status.duration + status.breakCooldownDuration;
+    const status = remote.getGlobal('getCurrentStatus')();
+    return (
+      status.startTime.valueOf() +
+      status.duration +
+      status.breakCooldownDuration
+    );
   }
 
-  getCompletedStages()
-  {
-    if(this.state.working == null)
-      return 0;
-    else if(this.state.duration == null || !(parseDuration(this.state.duration)>0) || !this.state.duration.match(/([\d\.]+[hms])+/) )
+  getCompletedStages() {
+    if (this.state.working == null) return 0;
+    if (
+      this.state.duration == null ||
+      !(parseDuration(this.state.duration) > 0) ||
+      !this.state.duration.match(/([\d\.]+[hms])+/)
+    )
       return 1;
-    else if(this.state.name == null)
-      return 2;
-    else
-      return 3;
+    if (this.state.name == null) return 2;
+    return 3;
   }
 
   submit() {
-    const currentStatus = remote.getGlobal("getCurrentStatus")();
+    const currentStatus = remote.getGlobal('getCurrentStatus')();
     const statusChange = {
       play: !this.state.working,
       startTime: new Date(),
       taskName: this.state.name,
-      //taskNotes: "",
+      // taskNotes: "",
       duration: parseDuration(this.state.duration),
       timerMode: true
     };
 
-    remote.getGlobal("setCurrentStatus")({...currentStatus, ...statusChange});
+    remote.getGlobal('setCurrentStatus')({ ...currentStatus, ...statusChange });
 
-    remote.getGlobal("goToTimerMode")();
+    remote.getGlobal('goToTimerMode')();
     remote.getCurrentWindow().close();
   }
-
 
   render() {
     return (
       <div>
         <Col>
           <Row>
-            <Button orange
-                    selected={this.state.working}
-                    onClick={()=>this.setState({working: true})}
-                    desc=""
-                    >Work</Button>
-            <Button blue
-                    selected={this.state.working === false}
-                    onClick={()=>this.setState({working: false})}
-                    disabled={this.state.breakCooldown }
-                    className={ this.state.breakCooldown && styles.dim } //this is so hacky and needs to be refactored
-                    desc={ this.state.breakCooldown ?
-                      <Countdown
-                        date={this.getBreakCooldownEnd()}
-                        onComplete={()=>{ this.setState({breakCooldown: false} )}}
-                        />
-                      : ''
-                    }
-            >Play</Button>
+            <Button
+              orange
+              selected={this.state.working}
+              onClick={() => this.setState({ working: true })}
+              desc=""
+            >
+              Work
+            </Button>
+            <Button
+              blue
+              selected={this.state.working === false}
+              onClick={() => this.setState({ working: false })}
+              disabled={this.state.breakCooldown}
+              className={this.state.breakCooldown && styles.dim} // this is so hacky and needs to be refactored
+              desc={
+                this.state.breakCooldown ? (
+                  <Countdown
+                    date={this.getBreakCooldownEnd()}
+                    onComplete={() => {
+                      this.setState({ breakCooldown: false });
+                    }}
+                  />
+                ) : (
+                  ''
+                )
+              }
+            >
+              Play
+            </Button>
           </Row>
           <Row className={!(this.getCompletedStages() >= 1) && styles.dim}>
-            {
-              ['10m','15m','30m'].map((dur,i) => {
-                return <Button orange={i%2===0}
-                               blue={i%2===1}
-                               selected={this.state.duration === dur && this.state.customDuration === false}
-                               disabled={!(this.getCompletedStages() >= 1)}
-                               onClick={()=>{if (this.getCompletedStages() >= 1) {this.setState({duration: dur, customDuration: false})}}}>{dur}
-                </Button>
-              })
-            }
-            <Input placeholder="Custom Time" className={!this.state.customDuration && styles.dimtext} value={this.props.duration} onChange={(event)=>{
-              this.setState({duration: event.target.value, customDuration: true})
-            }}/>
+            {['10m', '15m', '30m'].map((dur, i) => (
+              <Button
+                orange={i % 2 === 0}
+                blue={i % 2 === 1}
+                selected={
+                  this.state.duration === dur &&
+                  this.state.customDuration === false
+                }
+                disabled={!(this.getCompletedStages() >= 1)}
+                onClick={() => {
+                  if (this.getCompletedStages() >= 1) {
+                    this.setState({ duration: dur, customDuration: false });
+                  }
+                }}
+              >
+                {dur}
+              </Button>
+            ))}
+            <Input
+              placeholder="Custom Time"
+              className={!this.state.customDuration && styles.dimtext}
+              value={this.props.duration}
+              onChange={event => {
+                this.setState({
+                  duration: event.target.value,
+                  customDuration: true
+                });
+              }}
+            />
           </Row>
           <Row className={!(this.getCompletedStages() >= 2) && styles.dim}>
-            <Input placeholder="Name" value={this.props.name} disabled={!(this.getCompletedStages() >= 2)} onChange={event => {
-              this.setState({name: event.target.value})
-            }}/>
+            <Input
+              placeholder="Name"
+              value={this.props.name}
+              disabled={!(this.getCompletedStages() >= 2)}
+              onChange={event => {
+                this.setState({ name: event.target.value });
+              }}
+            />
           </Row>
           <Row className={!(this.getCompletedStages() >= 3) && styles.dim}>
-            <Button orange disabled={!(this.getCompletedStages() >= 3) } onClick={this.submit}>Start</Button>
+            <Button
+              orange
+              disabled={!(this.getCompletedStages() >= 3)}
+              onClick={this.submit}
+            >
+              Start
+            </Button>
+          </Row>
+          <Row>
+            <SettingsButton
+              blue
+              onClick={() => console.log('Settings')}
+            />
           </Row>
         </Col>
+        <Col />
       </div>
     );
   }

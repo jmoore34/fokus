@@ -1,0 +1,11 @@
+.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.buttonSelected {
+  filter: brightness(120%);
+
+  /* color: #5b595a; */
+  font-size: calc(var(--font-size) + 4px);
+  padding: calc(var(--padding-x) + 4px) calc(var(--padding-y) + 4px);
+}

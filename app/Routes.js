@@ -9,14 +9,16 @@ import CounterPage from './containers/CounterPage';
 export default class extends Component<Props> {
 
   render() {
-    const timerMode = remote.getGlobal("getCurrentStatus")().timerMode;
+    const timerMode = remote.getGlobal('getCurrentStatus')().timerMode;
     return (
       <App>
-          { timerMode ? <CounterPage/> :
-            <Switch>
-                <Route path={routes.HOME} component={HomePage}/>
-            </Switch>
-          }
+        {timerMode ? (
+          <CounterPage />
+        ) : (
+          <Switch>
+            <Route path={routes.HOME} component={HomePage} />
+          </Switch>
+        )}
       </App>
     );
   }
