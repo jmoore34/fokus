@@ -103,6 +103,7 @@ global.goToMainMode = () => {
   });
   mainWindow.setAlwaysOnTop(!DEVELOPMENT_BUILD,"floating");
   mainWindow.loadURL(`file://${__dirname}/app.html`);
+  mainWindow.setFullScreen(!DEVELOPMENT_BUILD); // fix: needed for fullscreen to actually activate
   mainWindow.setMenuBarVisibility(false);
   currentStatus.timerMode = false;
   mainWindow.show();
