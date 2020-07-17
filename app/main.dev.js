@@ -75,7 +75,7 @@ global.goToTimerMode = () => {
     width: w,
     resizable: true,
     draggable: true,
-    skipTaskbar: true,
+    skipTaskbar: false,
     focusable: true,
     fullscreen: false,
     titleBarStyle: 'hidden',
