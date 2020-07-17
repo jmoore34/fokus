@@ -32,6 +32,12 @@ const Header = styled.div`
   text-align: center;
 `;
 
+const Subheader = styled.div`
+  display: block;
+  font-size: 20px;
+  text-align: center;
+`;
+
 const InfoBox = styled.div`
   position: absolute;
   left: 0;
@@ -141,7 +147,12 @@ export default class Home extends Component<Props> {
           <Header>
             <Clock format="h:mm a" ticking/>
           </Header>
+          <div className={!this.state.breakCooldown && styles.hide}>
+            {/* Displays only on cooldown */}
+            <Subheader>Break Cooldown</Subheader>
+          </div>
           <div className={this.state.breakCooldown && styles.hide}>
+            {/* Displays when not on cooldown */}
             <Row>
               <Button orange
                       selected={this.state.working}
