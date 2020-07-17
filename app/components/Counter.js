@@ -46,8 +46,8 @@ export default class Counter extends Component<Props> {
     // Restore the duration because the user may have exited early or stayed longer
     const currentStatus = remote.getGlobal("getCurrentStatus")();
     const statusUpdate = {
-      duration: Date.now() - currentStatus.startTime.valueOf(),
-      breakCooldownDuration: currentStatus.play ? currentStatus.breakCooldownDuration + 60000 : 0,
+      duration: Math.min(currentStatus.duration, Date.now() - currentStatus.startTime.valueOf()),
+      breakCooldownDuration: currentStatus.play ? currentStatus.breakCooldownDuration + 180000 : 0,
     };
     remote.getGlobal("setCurrentStatus")({...currentStatus, ...statusUpdate});
     remote.getGlobal("goToMainMode")();

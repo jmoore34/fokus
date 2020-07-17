@@ -75,7 +75,7 @@ global.goToTimerMode = () => {
     width: w,
     resizable: true,
     draggable: true,
-    skipTaskbar: true,
+    skipTaskbar: false,
     focusable: true,
     fullscreen: false,
     titleBarStyle: 'hidden',
@@ -103,6 +103,7 @@ global.goToMainMode = () => {
   });
   mainWindow.setAlwaysOnTop(!DEVELOPMENT_BUILD,"floating");
   mainWindow.loadURL(`file://${__dirname}/app.html`);
+  mainWindow.setFullScreen(!DEVELOPMENT_BUILD); // fix: needed for fullscreen to actually activate
   mainWindow.setMenuBarVisibility(false);
   currentStatus.timerMode = false;
   mainWindow.show();
@@ -164,8 +165,10 @@ app.on('ready', async () => {
     mainWindow = null;
   });
 
-  const menuBuilder = new MenuBuilder(mainWindow);
-  menuBuilder.buildMenu();
+  ////// Disabled //////
+  // const menuBuilder = new MenuBuilder(mainWindow);
+  // menuBuilder.buildMenu();
+
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
   new AppUpdater();
