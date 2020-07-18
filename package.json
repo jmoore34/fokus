@@ -1,7 +1,7 @@
 {
   "name": "fokus",
   "productName": "fokus",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A productivity tool that you can not ignore",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
@@ -92,7 +92,7 @@
         "snap",
         "AppImage"
       ],
-      "category": "Development"
+      "category": "Utility"
     },
     "directories": {
       "buildResources": "resources",
@@ -100,25 +100,25 @@
     },
     "publish": {
       "provider": "github",
-      "owner": "programjm",
+      "owner": "jmoore34",
       "repo": "fokus",
       "private": false
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/programjm/fokus.git"
+    "url": "git+https://github.com/jmoore34/fokus.git"
   },
   "author": {
     "name": "Fokus Development Team",
     "email": "jtm170330@utdallas.edu",
-    "url": "https://github.com/programjm/fokus"
+    "url": "https://github.com/jmoore34/fokus"
   },
   "contributors": [
     {
       "name": "Jonathan Moore",
       "email": "jtm170330@utdallas.edu",
-      "url": "https://github.com/programjm"
+      "url": "https://jmoore34.github.io/"
     },
     {
       "name": "Jacob Hill",
@@ -156,7 +156,7 @@
     "break",
     "balance"
   ],
-  "homepage": "https://github.com/programjm/fokus",
+  "homepage": "https://github.com/jmoore34/fokus",
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {
@@ -211,7 +211,7 @@
     "cross-spawn": "^6.0.5",
     "css-loader": "^2.1.0",
     "detect-port": "^1.3.0",
-    "electron": "^4.0.0",
+    "electron": "4.0.0",
     "electron-builder": "^20.38.4",
     "electron-devtools-installer": "^2.2.4",
     "enzyme": "^3.8.0",
@@ -296,9 +296,6 @@
     "node": ">=7.x",
     "npm": ">=4.x",
     "yarn": ">=0.21.3"
-  },
-  "collective": {
-    "url": "https://opencollective.com/"
   },
   "browserslist": "electron 1.6",
   "husky": {
