@@ -75,7 +75,7 @@ global.goToTimerMode = () => {
     width: w,
     resizable: true,
     draggable: true,
-    skipTaskbar: false,
+    skipTaskbar: true,
     focusable: true,
     fullscreen: false,
     titleBarStyle: 'hidden',
@@ -87,6 +87,9 @@ global.goToTimerMode = () => {
   mainWindow.loadURL(`file://${__dirname}/app.html`);
   mainWindow.setMenuBarVisibility(false);
   currentStatus.timerMode = true;
+  mainWindow.on('restore', () => {
+    BrowserWindow.getAllWindows()[0].setSkipTaskbar(true); // can hide it when maximized
+  })
   mainWindow.show();
 };
 
@@ -108,6 +111,13 @@ global.goToMainMode = () => {
   currentStatus.timerMode = false;
   mainWindow.show();
 };
+
+// Called when the user presses the minimize button in the timer window
+global.minimizeTimer = () => {
+  BrowserWindow.getAllWindows()[0].minimize();
+  BrowserWindow.getAllWindows()[0].setSkipTaskbar(false); //so user can open it again
+}
+
 
 global.goToSettingsMode = () => {
 
