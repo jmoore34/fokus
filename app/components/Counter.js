@@ -63,6 +63,7 @@ export default class Counter extends Component<Props> {
     <div>
       <div className = {`${styles.mockup} ${styles.draggable}`}>Time Remaining: {format(this.state.remaining)}</div>
       <div className = {`${styles.mockup} ${styles.draggable}`}> Task: {status.taskName} ({status.play ? "play" : "focus"})</div>
+      <div className = {`${styles.mockup} ${styles.minimize}`} onClick={() => {remote.getGlobal("minimizeTimer")()}}>[-]</div>
       <div className = {`${styles.mockup} ${styles.close}`} onClick={this.close}>[x]</div>
     </div>
     )

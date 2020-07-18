@@ -10,11 +10,12 @@
  *
  * @flow
  */
-import { app, BrowserWindow, globalShortcut, screen } from 'electron';
+import { app, BrowserWindow, globalShortcut, remote, screen, Tray } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import routes from './constants/routes';
+import * as path from 'path';
 
 export default class AppUpdater {
   constructor() {
@@ -75,7 +76,7 @@ global.goToTimerMode = () => {
     width: w,
     resizable: true,
     draggable: true,
-    skipTaskbar: false,
+    skipTaskbar: true,
     focusable: true,
     fullscreen: false,
     titleBarStyle: 'hidden',
@@ -108,6 +109,16 @@ global.goToMainMode = () => {
   currentStatus.timerMode = false;
   mainWindow.show();
 };
+
+// Called when the user presses the minimize button in the timer window
+global.minimizeTimer = () => {
+  BrowserWindow.getAllWindows()[0].hide();
+}
+
+global.maximizeTimer = () => {
+  // when tray icon is clicked, un-minimize the timer window
+  BrowserWindow.getAllWindows()[0].show();
+}
 
 global.goToSettingsMode = () => {
 
@@ -153,6 +164,13 @@ app.on('ready', async () => {
   }
 
   global.goToMainMode();
+
+  var trayIcon = new Tray(path.join(__dirname, 'icons/icon.ico'));
+  trayIcon.setTitle("Fokus")
+  trayIcon.setToolTip("Fokus")
+  trayIcon.on('click', () => {
+    maximizeTimer()
+  });
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
