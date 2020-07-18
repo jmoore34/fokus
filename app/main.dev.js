@@ -143,6 +143,13 @@ app.on('ready', async () => {
     if (!ret) {
       console.log('registration failed')
     }
+  } else {
+    // if production build
+
+    // Make the app open on OS login
+    app.setLoginItemSettings({
+      openAtLogin: true
+    });
   }
 
   global.goToMainMode();
