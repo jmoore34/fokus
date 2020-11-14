@@ -177,7 +177,7 @@ export default class Home extends Component<Props> {
             </Row>
             <Row className={!(this.getCompletedStages() >= 1) && styles.dim}>
               {
-                ['10m', '15m', '30m'].map((dur, i) => {
+                ['2m', '10m', '15m', '30m'].map((dur, i) => {
                   return <Button orange={i % 2 === 0}
                                  blue={i % 2 === 1}
                                  selected={this.state.duration === dur && this.state.customDuration === false}
