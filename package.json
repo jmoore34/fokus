@@ -1,7 +1,7 @@
 {
   "name": "fokus",
   "productName": "fokus",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A productivity tool that you can not ignore",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
@@ -272,6 +272,7 @@
     "history": "^4.7.2",
     "parse-duration": "^0.1.1",
     "react": "^16.7.0",
+    "react-autosize-textarea": "^7.1.0",
     "react-countdown-now": "^2.1.0",
     "react-dom": "^16.7.0",
     "react-hot-loader": "^4.6.3",

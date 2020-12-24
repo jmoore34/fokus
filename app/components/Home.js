@@ -3,13 +3,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../constants/routes';
 import styles from './Home.css';
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components';
 import Button from './Button'
 import buttonStyle from './Button.css' // I apologize
 import parseDuration from 'parse-duration'
 import { remote } from 'electron';
 import Countdown from 'react-countdown-now'
 import  Clock from 'react-live-clock'
+import TextareaAutosize from 'react-autosize-textarea';
 type Props = {};
 const Row = styled.div`
   display: flex;
@@ -60,6 +61,34 @@ const Input = styled.input.attrs({
   transition: all 0.3s;
 `;
 
+const resize = keyframes`
+  from {
+    font-size: 19px;
+  }
+  to {
+    font-size: 23px;
+  }
+`;
+
+
+const TextArea = styled(TextareaAutosize)`
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 19px;
+  color: hsla(0, 100%, 95%, 53%);
+
+  :placeholder-shown {
+    color: hsla(0, 100%, 95%, 45%);
+    caret-color: hsla(0, 100%, 95%, 50%);
+    animation: 3s ${resize} infinite alternate ease-in-out;
+  }
+  resize: none;
+  text-align: center;
+  width: 100vw;
+  margin-top: 1em;
+  font-family: inherit;
+`;
 
 export default class Home extends Component<Props> {
   constructor(props) {
@@ -79,7 +108,8 @@ export default class Home extends Component<Props> {
       customDuration: false,
       name: "",
       breakCooldown: Date.now() < breakCooldownEnd.valueOf(), // Break cooldown has not yet finished
-      strictMode: true, //whether the UI should be simplified when in cooldown mode
+      strictMode: true, //whether the UI should be simplified when in cooldown mode,
+      userNote: remote.getGlobal("getCurrentStatus")().userNote
     };
 
   }
@@ -130,7 +160,8 @@ export default class Home extends Component<Props> {
       taskName: this.state.name,
       //taskNotes: "",
       duration: parseDuration(this.state.duration),
-      timerMode: true
+      timerMode: true,
+      userNote: this.state.userNote
     };
 
     remote.getGlobal("setCurrentStatus")({...currentStatus, ...statusChange});
@@ -205,6 +236,12 @@ export default class Home extends Component<Props> {
               <Button orange disabled={!(this.getCompletedStages() >= 3)} onClick={this.submit}>Start</Button>
             </Row>
           </div>
+          <Row>
+            <TextArea placeholder={`What do you want to do today?`}
+                      onChange={e => this.setState({ userNote: e.target.value })}
+                      rows={3}
+            >{this.state.userNote}</TextArea>
+          </Row>
         </Col>
         <InfoBox>
           {this.state.infoText}

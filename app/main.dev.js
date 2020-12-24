@@ -53,10 +53,10 @@ let currentStatus = {
   play: false,
   startTime: new Date(),
   taskName: "",
-  taskNotes: "",
   duration: 0,
   breakCooldownDuration: 0,
   timerMode: false,
+  userNotes: ""
 };
 
 global.setCurrentStatus = status => currentStatus = status;
