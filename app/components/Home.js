@@ -76,12 +76,14 @@ const TextArea = styled(TextareaAutosize)`
   border: none;
   outline: none;
   font-size: 19px;
-  color: hsla(0, 100%, 95%, 53%);
+  color: hsla(0, 100%, 95%, 67%);
 
   :placeholder-shown {
-    color: hsla(0, 100%, 95%, 45%);
     caret-color: hsla(0, 100%, 95%, 50%);
     animation: 3s ${resize} infinite alternate ease-in-out;
+  }
+  ::placeholder {
+    color: hsla(0, 100%, 95%, 50%);
   }
   resize: none;
   text-align: center;
@@ -238,9 +240,10 @@ export default class Home extends Component<Props> {
           </div>
           <Row>
             <TextArea placeholder={`What do you want to do today?`}
-                      onChange={e => this.setState({ userNote: e.target.value })}
+                      onInput={e => this.setState({ userNote: e.target.value.replace(/chk/g, "✔")})}
                       rows={3}
-            >{this.state.userNote}</TextArea>
+                      value={this.state.userNote}
+            />
           </Row>
         </Col>
         <InfoBox>
