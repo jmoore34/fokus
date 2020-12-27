@@ -1,6 +1,6 @@
 ## Inspiration
 
-One of our members, Jonathan, felt the currently available productivity and focus apps were lacking. The thing is, you can always just... ignore them. So we set out to build one that you can't ignore.
+Our motivation was that many currently available productivity and focus apps were lacking. The thing is, you can always just... ignore them. So we set out to build one that you can't ignore.
 
 ## What it does
 
