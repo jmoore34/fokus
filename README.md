@@ -6,6 +6,9 @@ One of our members, Jonathan, felt the currently available productivity and focu
 
 Our app is designed to launch on start and force you to immediately select "Work" or "Play". By selecting what you intend to accomplish with the session, you're more likely to stay on task. After selecting some other options as well, you can launch the application, which closes the full screen and creates a small notification in the bottom right with useful information, such as what task you're currently supposed to be working on and how much longer you're supposed to be working on it. At the end of the timer, the main window relaunches, forces you to select once again.
 
+![](https://i.imgur.com/v7zSVe2.jpg)
+![](https://i.imgur.com/Z5gok8Q.png)
+
 ## How we built it
 
 We decided to build using a combination of React, Electron, and Javascript, as well as an assortment of other technologies to hold it all together. Electron allowed us to write a desktop app in React. We created a main process that contained the core business logic, and this connected to all of the browser windows, which used React to control the UI of both the main page and the browser window.
