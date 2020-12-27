@@ -10,6 +10,8 @@ You can also keep track of goals with the notes field below the main UI. (Tip: Y
 
 ![](https://i.imgur.com/v7zSVe2.jpg)
 ![](https://i.imgur.com/Z5gok8Q.png)
+![](https://i.imgur.com/d7FKXrx.png)
+![](https://i.imgur.com/AYNIfnY.jpg)
 
 ## Installation
 
