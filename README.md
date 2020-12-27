@@ -6,8 +6,15 @@ Our motivation was that many currently available productivity and focus apps wer
 
 Our app is designed to launch on start and force you to immediately select "Work" or "Play". By selecting what you intend to accomplish with the session, you're more likely to stay on task. After selecting some other options as well, you can launch the application, which closes the full screen and creates a small notification in the bottom right with useful information, such as what task you're currently supposed to be working on and how much longer you're supposed to be working on it. At the end of the timer, the main window relaunches, forces you to select once again.
 
+You can also keep track of goals with the notes field below the main UI. (Tip: You can type "chk" to insert a ✔ checkmark.)
+
 ![](https://i.imgur.com/v7zSVe2.jpg)
 ![](https://i.imgur.com/Z5gok8Q.png)
+
+## Installation
+
+Simply download and run the installer from the [releases page](https://github.com/jmoore34/fokus/releases).
+
 
 ## How we built it
 
