@@ -1,9 +1,13 @@
 # Fokus
 
-![GitHub all releases](https://img.shields.io/github/downloads/jmoore34/fokus/total?color=green)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/jmoore34/fokus)
-![stars](https://img.shields.io/github/stars/jmoore34/fokus)
-![license](https://img.shields.io/github/license/jmoore34/fokus)
+[![Version](https://img.shields.io/github/v/release/jmoore34/fokus.svg)](https://github.com/jmoore34/fokus/releases)
+[![Downloads](https://img.shields.io/github/downloads/jmoore34/fokus/total.svg)](https://github.com/jmoore34/fokus/releases)
+[![License](https://img.shields.io/github/license/jmoore34/fokus.svg)](https://github.com/jmoore34/fokus)
+[![Activity](https://img.shields.io/tokei/lines/github/jmoore34/fokus.svg)](https://github.com/jmoore34/fokus/graphs/contributors)
+[![Activity](https://img.shields.io/github/contributors/jmoore34/fokus.svg)](https://github.com/jmoore34/fokus/graphs/contributors)
+[![Activity](https://img.shields.io/github/last-commit/jmoore34/fokus.svg)](https://github.com/jmoore34/fokus/commits)
+
+
 
 ## Inspiration
 
