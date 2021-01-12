@@ -1,3 +1,10 @@
+# Fokus
+
+![GitHub all releases](https://img.shields.io/github/downloads/jmoore34/fokus/total?color=green)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/jmoore34/fokus)
+![stars](https://img.shields.io/github/stars/jmoore34/fokus)
+![license](https://img.shields.io/github/license/jmoore34/fokus)
+
 ## Inspiration
 
 Our motivation was that many currently available productivity and focus apps were lacking. The thing is, you can always just... ignore them. So we set out to build one that you can't ignore.
