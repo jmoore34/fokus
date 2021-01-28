@@ -92,6 +92,8 @@ const TextArea = styled(TextareaAutosize)`
   font-family: inherit;
 `;
 
+const userNoteLocalStorageKey = "userNote"; // User's note is stored in localStorage -- this is the key for accessing it
+
 export default class Home extends Component<Props> {
   constructor(props) {
     super(props);
@@ -111,7 +113,7 @@ export default class Home extends Component<Props> {
       name: "",
       breakCooldown: Date.now() < breakCooldownEnd.valueOf(), // Break cooldown has not yet finished
       strictMode: true, //whether the UI should be simplified when in cooldown mode,
-      userNote: remote.getGlobal("getCurrentStatus")().userNote
+      userNote: localStorage.getItem(userNoteLocalStorageKey) ?? ""
     };
 
   }
@@ -240,7 +242,11 @@ export default class Home extends Component<Props> {
           </div>
           <Row>
             <TextArea placeholder={`What do you want to do today?`}
-                      onInput={e => this.setState({ userNote: e.target.value.replace(/chk/g, "✔")})}
+                      onInput={e => {
+                        const userNote = e.target.value.replace(/chk/g, "✔");
+                        this.setState({ userNote: userNote});
+                        localStorage.setItem(userNoteLocalStorageKey, userNote )
+                      }}
                       rows={3}
                       value={this.state.userNote}
             />

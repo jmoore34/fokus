@@ -56,7 +56,6 @@ let currentStatus = {
   duration: 0,
   breakCooldownDuration: 0,
   timerMode: false,
-  userNotes: ""
 };
 
 global.setCurrentStatus = status => currentStatus = status;

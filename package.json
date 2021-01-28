@@ -1,7 +1,7 @@
 {
   "name": "fokus",
   "productName": "fokus",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A productivity tool that you can not ignore",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
